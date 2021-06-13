@@ -1860,11 +1860,96 @@ extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 # 12 "main.c" 2
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdlib.h" 1 3
+
+
+
+
+
+
+typedef unsigned short wchar_t;
+
+
+
+
+
+
+
+typedef struct {
+ int rem;
+ int quot;
+} div_t;
+typedef struct {
+ unsigned rem;
+ unsigned quot;
+} udiv_t;
+typedef struct {
+ long quot;
+ long rem;
+} ldiv_t;
+typedef struct {
+ unsigned long quot;
+ unsigned long rem;
+} uldiv_t;
+# 65 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdlib.h" 3
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+
+
+
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+
+
+
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+# 104 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdlib.h" 3
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+# 13 "main.c" 2
+
 # 1 "./adc.h" 1
 # 18 "./adc.h"
 void ADC_Init(void);
 unsigned int ADC_Read(unsigned char channel);
-# 13 "main.c" 2
+# 14 "main.c" 2
 
 # 1 "./PWM.h" 1
 # 18 "./PWM.h"
@@ -1875,7 +1960,7 @@ void PWM1_Stop(void);
 void PWM2_Duty(unsigned int duty, unsigned int freq);
 void PWM2_Start(void);
 void PWM2_Stop(void);
-# 14 "main.c" 2
+# 15 "main.c" 2
 
 # 1 "./lcd.h" 1
 # 64 "./lcd.h"
@@ -1883,7 +1968,7 @@ void lcd_init(void);
 void lcd_cmd(unsigned char val);
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
-# 15 "main.c" 2
+# 16 "main.c" 2
 
 
 
@@ -1892,11 +1977,12 @@ void lcd_str(const char* str);
 
 
 int temperatura;
-int menu;
-int setPoint = 4190;
-int kp = 100;
-static char S4Anterior;
-static char S4Atual;
+int menu = 1;
+
+int setPoint = 4200;
+int kp = 90;
+char setPoint_string[32];
+char kp_string[32];
 
 const unsigned char digito[10] = {
     0b00111111,
@@ -1934,35 +2020,60 @@ void atualizaDisplay(unsigned int tempSet){
     RB4 = 0;
 }
 
-void controlarSetPoint(){
+void controlarValores(){
     static char S1Anterior;
     static char S1Atual;
     static char S2Anterior;
     static char S2Atual;
     static char S3Anterior;
     static char S3Atual;
+    static char S4Anterior;
+    static char S4Atual;
 
     S1Atual = RB0;
 
     if((S1Atual)&&(!S1Anterior)){
-        setPoint += 100;
+        if (menu != 1){
+            setPoint += 100;
+        } else {
+            kp += 100;
+        }
     }
 
     S1Anterior = S1Atual;
     S2Atual = RB1;
 
     if((S2Atual)&&(!S2Anterior)){
-        setPoint -= 100;
+        if (menu != 1){
+            setPoint -= 100;
+        } else {
+            kp -= 100;
+        }
     }
 
     S2Anterior = S2Atual;
     S3Atual = RB2;
 
     if((S3Atual)&&(!S3Anterior)){
-        setPoint += 10;
+        if (menu != 1){
+            setPoint += 10;
+        } else {
+            kp +=10;
+        }
     }
 
     S3Anterior = S3Atual;
+    S4Atual = RB3;
+
+    if((S4Atual)&&(!S4Anterior)){
+        if (menu == 1){
+            menu = 2;
+        } else {
+            menu = 1;
+        }
+    }
+
+    S4Anterior = S4Atual;
 }
 
 int controleMaximoMinimo(int valor){
@@ -1990,33 +2101,19 @@ void iniciarLcd(){
     lcd_cmd(0x85);
 }
 
-void escrever(char texto, int linha){
-    if (linha == 1){
-        lcd_cmd(0x85);
-    } else {
-        lcd_cmd(0xC5);
-    }
+void imprimirValoresLcd(){
+    sprintf(setPoint_string, "%d", setPoint);
+    sprintf(kp_string, "%d", kp);
 
-    lcd_str(texto);
-}
-
-void controlarLcd(){
-    S4Atual = RB3;
-
-    if((S4Atual)&&(!S4Anterior)){
-        if (menu == 1){
-            menu = 2;
-        } else {
-            menu = 1;
-        }
-    }
-
-    S4Anterior = S4Atual;
+    lcd_cmd(0x85);
+    lcd_str(setPoint_string);
+    lcd_cmd(0xC5);
+    lcd_str(kp_string);
 
     if (menu != 1){
-        escrever("Valor TEMP", 1);
+        lcd_cmd(0x89);
     } else {
-        escrever("Valor KP", 2);
+        lcd_cmd(0xC9);
     }
 }
 
@@ -2029,7 +2126,6 @@ void main(void) {
     int cooler;
     float erro;
     float up;
-    menu = 1;
 
     ADC_Init();
     PWM1_Start();
@@ -2037,7 +2133,7 @@ void main(void) {
     iniciarLcd();
 
     while(1){
-        controlarSetPoint();
+        controlarValores();
         temperatura = (ADC_Read(0)*10/8 - 150);
         cooler = (unsigned int)ADC_Read(1);
         erro = (setPoint/10) - temperatura;
@@ -2049,8 +2145,8 @@ void main(void) {
 
         PWM1_Duty(up, 4000);
         PWM2_Duty(cooler, 4000);
-        controlarLcd();
-        atualizaDisplay(setPoint);
+        imprimirValoresLcd();
+
     }
 
     return;

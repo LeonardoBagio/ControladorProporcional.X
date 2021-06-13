@@ -10,6 +10,7 @@
 #include <xc.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "adc.h"
 #include "PWM.h"
 #include "lcd.h"
@@ -20,11 +21,12 @@
 #define S4 RB3
 
 int temperatura;
-int menu;
-int setPoint = 4190;
-int kp = 100;
-static char S4Anterior;
-static char S4Atual;
+int menu = 1;
+
+int setPoint = 4200;
+int kp = 90;
+char setPoint_string[32];
+char kp_string[32];
 
 const unsigned char digito[10] = {
     0b00111111, //0
@@ -62,35 +64,60 @@ void atualizaDisplay(unsigned int tempSet){
     RB4 = 0;
 }
 
-void controlarSetPoint(){
+void controlarValores(){
     static char S1Anterior;
     static char S1Atual;
     static char S2Anterior;
     static char S2Atual;
     static char S3Anterior;
     static char S3Atual;
+    static char S4Anterior;
+    static char S4Atual;    
     
     S1Atual = S1;
 
     if((S1Atual)&&(!S1Anterior)){
-        setPoint += 100;
+        if (menu != 1){
+            setPoint += 100;
+        } else {
+            kp += 100;
+        }
     }
 
     S1Anterior = S1Atual;
     S2Atual = S2;
 
     if((S2Atual)&&(!S2Anterior)){
-        setPoint -= 100;
+        if (menu != 1){
+            setPoint -= 100;
+        } else {
+            kp -= 100;
+        }
     }
 
     S2Anterior = S2Atual;
     S3Atual = S3;
 
     if((S3Atual)&&(!S3Anterior)){
-        setPoint += 10;
+        if (menu != 1){
+            setPoint += 10;
+        } else {
+            kp +=10;
+        }
     }
 
     S3Anterior = S3Atual;
+    S4Atual = S4;
+    
+    if((S4Atual)&&(!S4Anterior)){
+        if (menu == 1){
+            menu = 2;
+        } else {
+            menu = 1;
+        }
+    }   
+    
+    S4Anterior = S4Atual;    
 }
 
 int controleMaximoMinimo(int valor){
@@ -118,33 +145,19 @@ void iniciarLcd(){
     lcd_cmd(L1_digito6);
 }
 
-void escrever(char texto, int linha){
-    if (linha == 1){
-        lcd_cmd(L1_digito6);
-    } else {
-        lcd_cmd(L2_digito6);
-    }
+void imprimirValoresLcd(){
+    sprintf(setPoint_string, "%d", setPoint);
+    sprintf(kp_string, "%d", kp);
     
-    lcd_str(texto);
-}
-
-void controlarLcd(){ 
-    S4Atual = S4;
-    
-    if((S4Atual)&&(!S4Anterior)){
-        if (menu == 1){
-            menu = 2;
-        } else {
-            menu = 1;
-        }
-    }
-    
-    S4Anterior = S4Atual;
+    lcd_cmd(L1_digito6);
+    lcd_str(setPoint_string);
+    lcd_cmd(L2_digito6);
+    lcd_str(kp_string);
     
     if (menu != 1){
-        escrever("Valor TEMP", 1);
+        lcd_cmd(L1_digito10);
     } else {
-        escrever("Valor KP", 2);
+        lcd_cmd(L2_digito10);
     }
 }
 
@@ -157,7 +170,6 @@ void main(void) {
     int cooler;
     float erro;
     float up;
-    menu = 1;
     
     ADC_Init();
     PWM1_Start();
@@ -165,7 +177,7 @@ void main(void) {
     iniciarLcd();
     
     while(1){
-        controlarSetPoint();
+        controlarValores();
         temperatura = (ADC_Read(0)*10/8 - 150);
         cooler      = (unsigned int)ADC_Read(1);
         erro        = (setPoint/10) - temperatura;
@@ -177,8 +189,8 @@ void main(void) {
         
         PWM1_Duty(up, 4000);
         PWM2_Duty(cooler, 4000);
-        controlarLcd();
-        atualizaDisplay(setPoint);
+        imprimirValoresLcd();
+        //atualizaDisplay(setPoint);
     }
     
     return;
