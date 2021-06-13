@@ -1980,44 +1980,27 @@ int temperatura;
 int menu = 1;
 
 int setPoint = 4200;
-int kp = 90;
+int setPointReferencia = 0;
 char setPoint_string[32];
+
+int kp = 90;
+int kpReferencia = 0;
 char kp_string[32];
 
-const unsigned char digito[10] = {
-    0b00111111,
-    0b00000110,
-    0b01011011,
-    0b01001111,
-    0b01100110,
-    0b01101101,
-    0b01111101,
-    0b00000111,
-    0b01111111,
-    0b01101111,
-};
-
-void atualizaDisplay(unsigned int tempSet){
+void imprimirTemperatura(unsigned int tempSet){
     int milhar = tempSet/1000;
     int centena = (tempSet%1000)/100;
     int dezena = ((tempSet%1000)%100)/10;
-    int unidade = ((tempSet%1000)%100)%10;
-    PORTD = digito[milhar];
-    RB7 = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RB7 = 0;
-    PORTD = digito[centena];
-    RB6 = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RB6 = 0;
-    PORTD = digito[dezena];
-    RB5 = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RB5 = 0;
-    PORTD = digito[unidade];
-    RB4 = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RB4 = 0;
+
+    lcd_cmd(0x85);
+    sprintf(setPoint_string, "%d", milhar);
+    lcd_str(setPoint_string);
+    sprintf(setPoint_string, "%d", centena);
+    lcd_str(setPoint_string);
+    lcd_str(".");
+    sprintf(setPoint_string, "%d", dezena);
+    lcd_str(setPoint_string);
+    lcd_str(" C");
 }
 
 void controlarValores(){
@@ -2088,8 +2071,24 @@ int controleMaximoMinimo(int valor){
     return valor;
 }
 
-void limpar(){
-    lcd_cmd(0x01);
+void imprimirValoresLcd(){
+    if (menu != 1){
+        if (setPoint != setPointReferencia){
+            imprimirTemperatura(setPoint);
+            setPointReferencia = setPoint;
+        }
+
+        lcd_cmd(0x89 +6);
+    } else {
+        if (kp != kpReferencia){
+            lcd_cmd(0xC5);
+            sprintf(kp_string, "%d", kp);
+            lcd_str(kp_string);
+            kpReferencia = kp;
+        }
+
+        lcd_cmd(0xC9 +6);
+    }
 }
 
 void iniciarLcd(){
@@ -2099,22 +2098,11 @@ void iniciarLcd(){
     lcd_cmd(0xC0);
     lcd_str("  KP:");
     lcd_cmd(0x85);
-}
 
-void imprimirValoresLcd(){
-    sprintf(setPoint_string, "%d", setPoint);
-    sprintf(kp_string, "%d", kp);
-
-    lcd_cmd(0x85);
-    lcd_str(setPoint_string);
-    lcd_cmd(0xC5);
-    lcd_str(kp_string);
-
-    if (menu != 1){
-        lcd_cmd(0x89);
-    } else {
-        lcd_cmd(0xC9);
-    }
+    imprimirValoresLcd();
+    menu = 2;
+    imprimirValoresLcd();
+    menu = 1;
 }
 
 void main(void) {
@@ -2146,7 +2134,6 @@ void main(void) {
         PWM1_Duty(up, 4000);
         PWM2_Duty(cooler, 4000);
         imprimirValoresLcd();
-
     }
 
     return;

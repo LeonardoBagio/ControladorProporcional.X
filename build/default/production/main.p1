@@ -1,24 +1,13 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"340 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h
-[; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 340: extern volatile unsigned char PORTD __attribute__((address(0x008)));
-[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
-"2695
-[; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 2695: extern volatile __bit RB7 __attribute__((address(0x37)));
-[v _RB7 `Vb ~T0 @X0 0 e@55 ]
-[v F842 `(v ~T0 @X0 1 tf1`ul ]
-"92 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\pic.h
-[v __delay `JF842 ~T0 @X0 0 e ]
-[p i __delay ]
-"2692 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h
-[; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 2692: extern volatile __bit RB6 __attribute__((address(0x36)));
-[v _RB6 `Vb ~T0 @X0 0 e@54 ]
-"2689
-[; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 2689: extern volatile __bit RB5 __attribute__((address(0x35)));
-[v _RB5 `Vb ~T0 @X0 0 e@53 ]
-"2686
-[; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 2686: extern volatile __bit RB4 __attribute__((address(0x34)));
-[v _RB4 `Vb ~T0 @X0 0 e@52 ]
-"2674
+"65 ./lcd.h
+[; ;./lcd.h: 65: void lcd_cmd(unsigned char val);
+[v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
+"194 C:\Program Files\Microchip\xc8\v2.32\pic\include\c90\stdio.h
+[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
+"67 ./lcd.h
+[; ;./lcd.h: 67: void lcd_str(const char* str);
+[v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
+"2674 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 2674: extern volatile __bit RB0 __attribute__((address(0x30)));
 [v _RB0 `Vb ~T0 @X0 0 e@48 ]
 "2677
@@ -30,17 +19,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2683
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 2683: extern volatile __bit RB3 __attribute__((address(0x33)));
 [v _RB3 `Vb ~T0 @X0 0 e@51 ]
-"65 ./lcd.h
-[; ;./lcd.h: 65: void lcd_cmd(unsigned char val);
-[v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
-"64
+"64 ./lcd.h
 [; ;./lcd.h: 64: void lcd_init(void);
 [v _lcd_init `(v ~T0 @X0 0 ef ]
-"67
-[; ;./lcd.h: 67: void lcd_str(const char* str);
-[v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
-"194 C:\Program Files\Microchip\xc8\v2.32\pic\include\c90\stdio.h
-[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
 [p mainexit ]
 "1325 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f877a.h: 1325: extern volatile unsigned char TRISA __attribute__((address(0x085)));
@@ -287,500 +268,489 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 4200 `i
 ]
 "27
-[; ;main.c: 27: int kp = 90;
-[v _kp `i ~T0 @X0 1 e ]
-[i _kp
--> 90 `i
+[; ;main.c: 27: int setPointReferencia = 0;
+[v _setPointReferencia `i ~T0 @X0 1 e ]
+[i _setPointReferencia
+-> 0 `i
 ]
 "28
 [; ;main.c: 28: char setPoint_string[32];
 [v _setPoint_string `uc ~T0 @X0 -> 32 `i e ]
-"29
-[; ;main.c: 29: char kp_string[32];
-[v _kp_string `uc ~T0 @X0 -> 32 `i e ]
-"31
-[; ;main.c: 31: const unsigned char digito[10] = {
-[v _digito `Cuc ~T0 @X0 -> 10 `i e ]
-[i _digito
-:U ..
--> -> 63 `i `uc
--> -> 6 `i `uc
--> -> 91 `i `uc
--> -> 79 `i `uc
--> -> 102 `i `uc
--> -> 109 `i `uc
--> -> 125 `i `uc
--> -> 7 `i `uc
--> -> 127 `i `uc
--> -> 111 `i `uc
-..
+"30
+[; ;main.c: 30: int kp = 90;
+[v _kp `i ~T0 @X0 1 e ]
+[i _kp
+-> 90 `i
 ]
-"44
-[; ;main.c: 44: void atualizaDisplay(unsigned int tempSet){
-[v _atualizaDisplay `(v ~T0 @X0 1 ef1`ui ]
+"31
+[; ;main.c: 31: int kpReferencia = 0;
+[v _kpReferencia `i ~T0 @X0 1 e ]
+[i _kpReferencia
+-> 0 `i
+]
+"32
+[; ;main.c: 32: char kp_string[32];
+[v _kp_string `uc ~T0 @X0 -> 32 `i e ]
+"34
+[; ;main.c: 34: void imprimirTemperatura(unsigned int tempSet){
+[v _imprimirTemperatura `(v ~T0 @X0 1 ef1`ui ]
 {
-[e :U _atualizaDisplay ]
+[e :U _imprimirTemperatura ]
 [v _tempSet `ui ~T0 @X0 1 r1 ]
 [f ]
-"45
-[; ;main.c: 45:     int milhar = tempSet/1000;
+"35
+[; ;main.c: 35:     int milhar = tempSet/1000;
 [v _milhar `i ~T0 @X0 1 a ]
 [e = _milhar -> / _tempSet -> -> 1000 `i `ui `i ]
-"46
-[; ;main.c: 46:     int centena = (tempSet%1000)/100;
+"36
+[; ;main.c: 36:     int centena = (tempSet%1000)/100;
 [v _centena `i ~T0 @X0 1 a ]
 [e = _centena -> / % _tempSet -> -> 1000 `i `ui -> -> 100 `i `ui `i ]
-"47
-[; ;main.c: 47:     int dezena = ((tempSet%1000)%100)/10;
+"37
+[; ;main.c: 37:     int dezena = ((tempSet%1000)%100)/10;
 [v _dezena `i ~T0 @X0 1 a ]
 [e = _dezena -> / % % _tempSet -> -> 1000 `i `ui -> -> 100 `i `ui -> -> 10 `i `ui `i ]
+"39
+[; ;main.c: 39:     lcd_cmd(0x85);
+[e ( _lcd_cmd (1 -> -> 133 `i `uc ]
+"40
+[; ;main.c: 40:     sprintf(setPoint_string, "%d", milhar);
+[e ( _sprintf (1 , (. , &U _setPoint_string :s 1C _milhar ]
+"41
+[; ;main.c: 41:     lcd_str(setPoint_string);
+[e ( _lcd_str (1 -> &U _setPoint_string `*Cuc ]
+"42
+[; ;main.c: 42:     sprintf(setPoint_string, "%d", centena);
+[e ( _sprintf (1 , (. , &U _setPoint_string :s 2C _centena ]
+"43
+[; ;main.c: 43:     lcd_str(setPoint_string);
+[e ( _lcd_str (1 -> &U _setPoint_string `*Cuc ]
+"44
+[; ;main.c: 44:     lcd_str(".");
+[e ( _lcd_str (1 :s 3C ]
+"45
+[; ;main.c: 45:     sprintf(setPoint_string, "%d", dezena);
+[e ( _sprintf (1 , (. , &U _setPoint_string :s 4C _dezena ]
+"46
+[; ;main.c: 46:     lcd_str(setPoint_string);
+[e ( _lcd_str (1 -> &U _setPoint_string `*Cuc ]
+"47
+[; ;main.c: 47:     lcd_str(" C");
+[e ( _lcd_str (1 :s 5C ]
 "48
-[; ;main.c: 48:     int unidade = ((tempSet%1000)%100)%10;
-[v _unidade `i ~T0 @X0 1 a ]
-[e = _unidade -> % % % _tempSet -> -> 1000 `i `ui -> -> 100 `i `ui -> -> 10 `i `ui `i ]
-"49
-[; ;main.c: 49:     PORTD = digito[milhar];
-[e = _PORTD *U + &U _digito * -> -> _milhar `ui `ux -> -> # *U &U _digito `ui `ux ]
-"50
-[; ;main.c: 50:     RB7 = 1;
-[e = _RB7 -> -> 1 `i `b ]
-"51
-[; ;main.c: 51:     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"52
-[; ;main.c: 52:     RB7 = 0;
-[e = _RB7 -> -> 0 `i `b ]
-"53
-[; ;main.c: 53:     PORTD = digito[centena];
-[e = _PORTD *U + &U _digito * -> -> _centena `ui `ux -> -> # *U &U _digito `ui `ux ]
-"54
-[; ;main.c: 54:     RB6 = 1;
-[e = _RB6 -> -> 1 `i `b ]
-"55
-[; ;main.c: 55:     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"56
-[; ;main.c: 56:     RB6 = 0;
-[e = _RB6 -> -> 0 `i `b ]
-"57
-[; ;main.c: 57:     PORTD = digito[dezena];
-[e = _PORTD *U + &U _digito * -> -> _dezena `ui `ux -> -> # *U &U _digito `ui `ux ]
-"58
-[; ;main.c: 58:     RB5 = 1;
-[e = _RB5 -> -> 1 `i `b ]
-"59
-[; ;main.c: 59:     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"60
-[; ;main.c: 60:     RB5 = 0;
-[e = _RB5 -> -> 0 `i `b ]
-"61
-[; ;main.c: 61:     PORTD = digito[unidade];
-[e = _PORTD *U + &U _digito * -> -> _unidade `ui `ux -> -> # *U &U _digito `ui `ux ]
-"62
-[; ;main.c: 62:     RB4 = 1;
-[e = _RB4 -> -> 1 `i `b ]
-"63
-[; ;main.c: 63:     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"64
-[; ;main.c: 64:     RB4 = 0;
-[e = _RB4 -> -> 0 `i `b ]
-"65
-[; ;main.c: 65: }
+[; ;main.c: 48: }
 [e :UE 100 ]
 }
-"67
-[; ;main.c: 67: void controlarValores(){
+"50
+[; ;main.c: 50: void controlarValores(){
 [v _controlarValores `(v ~T0 @X0 1 ef ]
 {
 [e :U _controlarValores ]
 [f ]
-"68
-[; ;main.c: 68:     static char S1Anterior;
+"51
+[; ;main.c: 51:     static char S1Anterior;
 [v F1151 `uc ~T0 @X0 1 s S1Anterior ]
-"69
-[; ;main.c: 69:     static char S1Atual;
+"52
+[; ;main.c: 52:     static char S1Atual;
 [v F1152 `uc ~T0 @X0 1 s S1Atual ]
-"70
-[; ;main.c: 70:     static char S2Anterior;
+"53
+[; ;main.c: 53:     static char S2Anterior;
 [v F1153 `uc ~T0 @X0 1 s S2Anterior ]
-"71
-[; ;main.c: 71:     static char S2Atual;
+"54
+[; ;main.c: 54:     static char S2Atual;
 [v F1154 `uc ~T0 @X0 1 s S2Atual ]
-"72
-[; ;main.c: 72:     static char S3Anterior;
+"55
+[; ;main.c: 55:     static char S3Anterior;
 [v F1155 `uc ~T0 @X0 1 s S3Anterior ]
-"73
-[; ;main.c: 73:     static char S3Atual;
+"56
+[; ;main.c: 56:     static char S3Atual;
 [v F1156 `uc ~T0 @X0 1 s S3Atual ]
-"74
-[; ;main.c: 74:     static char S4Anterior;
+"57
+[; ;main.c: 57:     static char S4Anterior;
 [v F1157 `uc ~T0 @X0 1 s S4Anterior ]
-"75
-[; ;main.c: 75:     static char S4Atual;
+"58
+[; ;main.c: 58:     static char S4Atual;
 [v F1158 `uc ~T0 @X0 1 s S4Atual ]
-"77
-[; ;main.c: 77:     S1Atual = RB0;
+"60
+[; ;main.c: 60:     S1Atual = RB0;
 [e = F1152 -> _RB0 `uc ]
-"79
-[; ;main.c: 79:     if((S1Atual)&&(!S1Anterior)){
+"62
+[; ;main.c: 62:     if((S1Atual)&&(!S1Anterior)){
 [e $ ! && != -> F1152 `i -> 0 `i ! != -> F1151 `i -> 0 `i 102  ]
 {
-"80
-[; ;main.c: 80:         if (menu != 1){
+"63
+[; ;main.c: 63:         if (menu != 1){
 [e $ ! != _menu -> 1 `i 103  ]
 {
-"81
-[; ;main.c: 81:             setPoint += 100;
+"64
+[; ;main.c: 64:             setPoint += 100;
 [e =+ _setPoint -> 100 `i ]
-"82
-[; ;main.c: 82:         } else {
+"65
+[; ;main.c: 65:         } else {
 }
 [e $U 104  ]
 [e :U 103 ]
 {
-"83
-[; ;main.c: 83:             kp += 100;
+"66
+[; ;main.c: 66:             kp += 100;
 [e =+ _kp -> 100 `i ]
-"84
-[; ;main.c: 84:         }
+"67
+[; ;main.c: 67:         }
 }
 [e :U 104 ]
-"85
-[; ;main.c: 85:     }
+"68
+[; ;main.c: 68:     }
 }
 [e :U 102 ]
-"87
-[; ;main.c: 87:     S1Anterior = S1Atual;
+"70
+[; ;main.c: 70:     S1Anterior = S1Atual;
 [e = F1151 F1152 ]
-"88
-[; ;main.c: 88:     S2Atual = RB1;
+"71
+[; ;main.c: 71:     S2Atual = RB1;
 [e = F1154 -> _RB1 `uc ]
-"90
-[; ;main.c: 90:     if((S2Atual)&&(!S2Anterior)){
+"73
+[; ;main.c: 73:     if((S2Atual)&&(!S2Anterior)){
 [e $ ! && != -> F1154 `i -> 0 `i ! != -> F1153 `i -> 0 `i 105  ]
 {
-"91
-[; ;main.c: 91:         if (menu != 1){
+"74
+[; ;main.c: 74:         if (menu != 1){
 [e $ ! != _menu -> 1 `i 106  ]
 {
-"92
-[; ;main.c: 92:             setPoint -= 100;
+"75
+[; ;main.c: 75:             setPoint -= 100;
 [e =- _setPoint -> 100 `i ]
-"93
-[; ;main.c: 93:         } else {
+"76
+[; ;main.c: 76:         } else {
 }
 [e $U 107  ]
 [e :U 106 ]
 {
-"94
-[; ;main.c: 94:             kp -= 100;
+"77
+[; ;main.c: 77:             kp -= 100;
 [e =- _kp -> 100 `i ]
-"95
-[; ;main.c: 95:         }
+"78
+[; ;main.c: 78:         }
 }
 [e :U 107 ]
-"96
-[; ;main.c: 96:     }
+"79
+[; ;main.c: 79:     }
 }
 [e :U 105 ]
-"98
-[; ;main.c: 98:     S2Anterior = S2Atual;
+"81
+[; ;main.c: 81:     S2Anterior = S2Atual;
 [e = F1153 F1154 ]
-"99
-[; ;main.c: 99:     S3Atual = RB2;
+"82
+[; ;main.c: 82:     S3Atual = RB2;
 [e = F1156 -> _RB2 `uc ]
-"101
-[; ;main.c: 101:     if((S3Atual)&&(!S3Anterior)){
+"84
+[; ;main.c: 84:     if((S3Atual)&&(!S3Anterior)){
 [e $ ! && != -> F1156 `i -> 0 `i ! != -> F1155 `i -> 0 `i 108  ]
 {
-"102
-[; ;main.c: 102:         if (menu != 1){
+"85
+[; ;main.c: 85:         if (menu != 1){
 [e $ ! != _menu -> 1 `i 109  ]
 {
-"103
-[; ;main.c: 103:             setPoint += 10;
+"86
+[; ;main.c: 86:             setPoint += 10;
 [e =+ _setPoint -> 10 `i ]
-"104
-[; ;main.c: 104:         } else {
+"87
+[; ;main.c: 87:         } else {
 }
 [e $U 110  ]
 [e :U 109 ]
 {
-"105
-[; ;main.c: 105:             kp +=10;
+"88
+[; ;main.c: 88:             kp +=10;
 [e =+ _kp -> 10 `i ]
-"106
-[; ;main.c: 106:         }
+"89
+[; ;main.c: 89:         }
 }
 [e :U 110 ]
-"107
-[; ;main.c: 107:     }
+"90
+[; ;main.c: 90:     }
 }
 [e :U 108 ]
-"109
-[; ;main.c: 109:     S3Anterior = S3Atual;
+"92
+[; ;main.c: 92:     S3Anterior = S3Atual;
 [e = F1155 F1156 ]
-"110
-[; ;main.c: 110:     S4Atual = RB3;
+"93
+[; ;main.c: 93:     S4Atual = RB3;
 [e = F1158 -> _RB3 `uc ]
-"112
-[; ;main.c: 112:     if((S4Atual)&&(!S4Anterior)){
+"95
+[; ;main.c: 95:     if((S4Atual)&&(!S4Anterior)){
 [e $ ! && != -> F1158 `i -> 0 `i ! != -> F1157 `i -> 0 `i 111  ]
 {
-"113
-[; ;main.c: 113:         if (menu == 1){
+"96
+[; ;main.c: 96:         if (menu == 1){
 [e $ ! == _menu -> 1 `i 112  ]
 {
-"114
-[; ;main.c: 114:             menu = 2;
+"97
+[; ;main.c: 97:             menu = 2;
 [e = _menu -> 2 `i ]
-"115
-[; ;main.c: 115:         } else {
+"98
+[; ;main.c: 98:         } else {
 }
 [e $U 113  ]
 [e :U 112 ]
 {
-"116
-[; ;main.c: 116:             menu = 1;
+"99
+[; ;main.c: 99:             menu = 1;
 [e = _menu -> 1 `i ]
-"117
-[; ;main.c: 117:         }
+"100
+[; ;main.c: 100:         }
 }
 [e :U 113 ]
-"118
-[; ;main.c: 118:     }
+"101
+[; ;main.c: 101:     }
 }
 [e :U 111 ]
-"120
-[; ;main.c: 120:     S4Anterior = S4Atual;
+"103
+[; ;main.c: 103:     S4Anterior = S4Atual;
 [e = F1157 F1158 ]
-"121
-[; ;main.c: 121: }
+"104
+[; ;main.c: 104: }
 [e :UE 101 ]
 }
-"123
-[; ;main.c: 123: int controleMaximoMinimo(int valor){
+"106
+[; ;main.c: 106: int controleMaximoMinimo(int valor){
 [v _controleMaximoMinimo `(i ~T0 @X0 1 ef1`i ]
 {
 [e :U _controleMaximoMinimo ]
 [v _valor `i ~T0 @X0 1 r1 ]
 [f ]
-"124
-[; ;main.c: 124:     if (valor < 0){
+"107
+[; ;main.c: 107:     if (valor < 0){
 [e $ ! < _valor -> 0 `i 115  ]
 {
-"125
-[; ;main.c: 125:         valor = 0;
+"108
+[; ;main.c: 108:         valor = 0;
 [e = _valor -> 0 `i ]
-"126
-[; ;main.c: 126:     }
+"109
+[; ;main.c: 109:     }
 }
 [e :U 115 ]
-"128
-[; ;main.c: 128:     if (valor > 1023){
+"111
+[; ;main.c: 111:     if (valor > 1023){
 [e $ ! > _valor -> 1023 `i 116  ]
 {
-"129
-[; ;main.c: 129:         valor = 1023;
+"112
+[; ;main.c: 112:         valor = 1023;
 [e = _valor -> 1023 `i ]
-"130
-[; ;main.c: 130:     }
+"113
+[; ;main.c: 113:     }
 }
 [e :U 116 ]
-"132
-[; ;main.c: 132:     return valor;
+"115
+[; ;main.c: 115:     return valor;
 [e ) _valor ]
 [e $UE 114  ]
-"133
-[; ;main.c: 133: }
+"116
+[; ;main.c: 116: }
 [e :UE 114 ]
 }
-"135
-[; ;main.c: 135: void limpar(){
-[v _limpar `(v ~T0 @X0 1 ef ]
-{
-[e :U _limpar ]
-[f ]
-"136
-[; ;main.c: 136:     lcd_cmd(0x01);
-[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
-"137
-[; ;main.c: 137: }
-[e :UE 117 ]
-}
-"139
-[; ;main.c: 139: void iniciarLcd(){
-[v _iniciarLcd `(v ~T0 @X0 1 ef ]
-{
-[e :U _iniciarLcd ]
-[f ]
-"140
-[; ;main.c: 140:     lcd_init();
-[e ( _lcd_init ..  ]
-"141
-[; ;main.c: 141:     lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
-"142
-[; ;main.c: 142:     lcd_str("TEMP:");
-[e ( _lcd_str (1 :s 1C ]
-"143
-[; ;main.c: 143:     lcd_cmd(0xC0);
-[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
-"144
-[; ;main.c: 144:     lcd_str("  KP:");
-[e ( _lcd_str (1 :s 2C ]
-"145
-[; ;main.c: 145:     lcd_cmd(0x85);
-[e ( _lcd_cmd (1 -> -> 133 `i `uc ]
-"146
-[; ;main.c: 146: }
-[e :UE 118 ]
-}
-"148
-[; ;main.c: 148: void imprimirValoresLcd(){
+"118
+[; ;main.c: 118: void imprimirValoresLcd(){
 [v _imprimirValoresLcd `(v ~T0 @X0 1 ef ]
 {
 [e :U _imprimirValoresLcd ]
 [f ]
-"149
-[; ;main.c: 149:     sprintf(setPoint_string, "%d", setPoint);
-[e ( _sprintf (1 , (. , &U _setPoint_string :s 3C _setPoint ]
-"150
-[; ;main.c: 150:     sprintf(kp_string, "%d", kp);
-[e ( _sprintf (1 , (. , &U _kp_string :s 4C _kp ]
-"152
-[; ;main.c: 152:     lcd_cmd(0x85);
-[e ( _lcd_cmd (1 -> -> 133 `i `uc ]
-"153
-[; ;main.c: 153:     lcd_str(setPoint_string);
-[e ( _lcd_str (1 -> &U _setPoint_string `*Cuc ]
-"154
-[; ;main.c: 154:     lcd_cmd(0xC5);
-[e ( _lcd_cmd (1 -> -> 197 `i `uc ]
-"155
-[; ;main.c: 155:     lcd_str(kp_string);
-[e ( _lcd_str (1 -> &U _kp_string `*Cuc ]
-"157
-[; ;main.c: 157:     if (menu != 1){
-[e $ ! != _menu -> 1 `i 120  ]
+"119
+[; ;main.c: 119:     if (menu != 1){
+[e $ ! != _menu -> 1 `i 118  ]
 {
-"158
-[; ;main.c: 158:         lcd_cmd(0x89);
-[e ( _lcd_cmd (1 -> -> 137 `i `uc ]
-"159
-[; ;main.c: 159:     } else {
+"120
+[; ;main.c: 120:         if (setPoint != setPointReferencia){
+[e $ ! != _setPoint _setPointReferencia 119  ]
+{
+"121
+[; ;main.c: 121:             imprimirTemperatura(setPoint);
+[e ( _imprimirTemperatura (1 -> _setPoint `ui ]
+"122
+[; ;main.c: 122:             setPointReferencia = setPoint;
+[e = _setPointReferencia _setPoint ]
+"123
+[; ;main.c: 123:         }
 }
-[e $U 121  ]
-[e :U 120 ]
+[e :U 119 ]
+"125
+[; ;main.c: 125:         lcd_cmd(0x89 +6);
+[e ( _lcd_cmd (1 -> + -> 137 `i -> 6 `i `uc ]
+"126
+[; ;main.c: 126:     } else {
+}
+[e $U 120  ]
+[e :U 118 ]
 {
-"160
-[; ;main.c: 160:         lcd_cmd(0xC9);
-[e ( _lcd_cmd (1 -> -> 201 `i `uc ]
-"161
-[; ;main.c: 161:     }
+"127
+[; ;main.c: 127:         if (kp != kpReferencia){
+[e $ ! != _kp _kpReferencia 121  ]
+{
+"128
+[; ;main.c: 128:             lcd_cmd(0xC5);
+[e ( _lcd_cmd (1 -> -> 197 `i `uc ]
+"129
+[; ;main.c: 129:             sprintf(kp_string, "%d", kp);
+[e ( _sprintf (1 , (. , &U _kp_string :s 6C _kp ]
+"130
+[; ;main.c: 130:             lcd_str(kp_string);
+[e ( _lcd_str (1 -> &U _kp_string `*Cuc ]
+"131
+[; ;main.c: 131:             kpReferencia = kp;
+[e = _kpReferencia _kp ]
+"132
+[; ;main.c: 132:         }
 }
 [e :U 121 ]
-"162
-[; ;main.c: 162: }
-[e :UE 119 ]
+"134
+[; ;main.c: 134:         lcd_cmd(0xC9 +6);
+[e ( _lcd_cmd (1 -> + -> 201 `i -> 6 `i `uc ]
+"135
+[; ;main.c: 135:     }
+}
+[e :U 120 ]
+"136
+[; ;main.c: 136: }
+[e :UE 117 ]
+}
+"138
+[; ;main.c: 138: void iniciarLcd(){
+[v _iniciarLcd `(v ~T0 @X0 1 ef ]
+{
+[e :U _iniciarLcd ]
+[f ]
+"139
+[; ;main.c: 139:     lcd_init();
+[e ( _lcd_init ..  ]
+"140
+[; ;main.c: 140:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"141
+[; ;main.c: 141:     lcd_str("TEMP:");
+[e ( _lcd_str (1 :s 7C ]
+"142
+[; ;main.c: 142:     lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
+"143
+[; ;main.c: 143:     lcd_str("  KP:");
+[e ( _lcd_str (1 :s 8C ]
+"144
+[; ;main.c: 144:     lcd_cmd(0x85);
+[e ( _lcd_cmd (1 -> -> 133 `i `uc ]
+"146
+[; ;main.c: 146:     imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
+"147
+[; ;main.c: 147:     menu = 2;
+[e = _menu -> 2 `i ]
+"148
+[; ;main.c: 148:     imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
+"149
+[; ;main.c: 149:     menu = 1;
+[e = _menu -> 1 `i ]
+"150
+[; ;main.c: 150: }
+[e :UE 122 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"164
-[; ;main.c: 164: void main(void) {
+"152
+[; ;main.c: 152: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"165
-[; ;main.c: 165:     TRISA = 0xFF;
+"153
+[; ;main.c: 153:     TRISA = 0xFF;
 [e = _TRISA -> -> 255 `i `uc ]
-"166
-[; ;main.c: 166:     TRISB = 0x0F;
+"154
+[; ;main.c: 154:     TRISB = 0x0F;
 [e = _TRISB -> -> 15 `i `uc ]
-"167
-[; ;main.c: 167:     TRISC = 0x00;
+"155
+[; ;main.c: 155:     TRISC = 0x00;
 [e = _TRISC -> -> 0 `i `uc ]
-"168
-[; ;main.c: 168:     TRISD = 0x00;
+"156
+[; ;main.c: 156:     TRISD = 0x00;
 [e = _TRISD -> -> 0 `i `uc ]
-"169
-[; ;main.c: 169:     TRISE = 0x00;
+"157
+[; ;main.c: 157:     TRISE = 0x00;
 [e = _TRISE -> -> 0 `i `uc ]
-"170
-[; ;main.c: 170:     int cooler;
+"158
+[; ;main.c: 158:     int cooler;
 [v _cooler `i ~T0 @X0 1 a ]
-"171
-[; ;main.c: 171:     float erro;
+"159
+[; ;main.c: 159:     float erro;
 [v _erro `f ~T0 @X0 1 a ]
-"172
-[; ;main.c: 172:     float up;
+"160
+[; ;main.c: 160:     float up;
 [v _up `f ~T0 @X0 1 a ]
-"174
-[; ;main.c: 174:     ADC_Init();
+"162
+[; ;main.c: 162:     ADC_Init();
 [e ( _ADC_Init ..  ]
-"175
-[; ;main.c: 175:     PWM1_Start();
+"163
+[; ;main.c: 163:     PWM1_Start();
 [e ( _PWM1_Start ..  ]
-"176
-[; ;main.c: 176:     PWM2_Start();
+"164
+[; ;main.c: 164:     PWM2_Start();
 [e ( _PWM2_Start ..  ]
-"177
-[; ;main.c: 177:     iniciarLcd();
+"165
+[; ;main.c: 165:     iniciarLcd();
 [e ( _iniciarLcd ..  ]
-"179
-[; ;main.c: 179:     while(1){
-[e :U 124 ]
-{
-"180
-[; ;main.c: 180:         controlarValores();
-[e ( _controlarValores ..  ]
-"181
-[; ;main.c: 181:         temperatura = (ADC_Read(0)*10/8 - 150);
-[e = _temperatura -> - / * ( _ADC_Read (1 -> -> 0 `i `uc -> -> 10 `i `ui -> -> 8 `i `ui -> -> 150 `i `ui `i ]
-"182
-[; ;main.c: 182:         cooler = (unsigned int)ADC_Read(1);
-[e = _cooler -> ( _ADC_Read (1 -> -> 1 `i `uc `i ]
-"183
-[; ;main.c: 183:         erro = (setPoint/10) - temperatura;
-[e = _erro -> - / _setPoint -> 10 `i _temperatura `f ]
-"184
-[; ;main.c: 184:         up = kp * erro;
-[e = _up * -> _kp `f _erro ]
-"186
-[; ;main.c: 186:         cooler = controleMaximoMinimo(cooler);
-[e = _cooler ( _controleMaximoMinimo (1 _cooler ]
-"187
-[; ;main.c: 187:         temperatura = controleMaximoMinimo(temperatura);
-[e = _temperatura ( _controleMaximoMinimo (1 _temperatura ]
-"188
-[; ;main.c: 188:         up = controleMaximoMinimo(up);
-[e = _up -> ( _controleMaximoMinimo (1 -> _up `i `f ]
-"190
-[; ;main.c: 190:         PWM1_Duty(up, 4000);
-[e ( _PWM1_Duty (2 , -> _up `ui -> -> 4000 `i `ui ]
-"191
-[; ;main.c: 191:         PWM2_Duty(cooler, 4000);
-[e ( _PWM2_Duty (2 , -> _cooler `ui -> -> 4000 `i `ui ]
-"192
-[; ;main.c: 192:         imprimirValoresLcd();
-[e ( _imprimirValoresLcd ..  ]
-"194
-[; ;main.c: 194:     }
-}
-[e :U 123 ]
-[e $U 124  ]
+"167
+[; ;main.c: 167:     while(1){
 [e :U 125 ]
-"196
-[; ;main.c: 196:     return;
-[e $UE 122  ]
-"197
-[; ;main.c: 197: }
-[e :UE 122 ]
+{
+"168
+[; ;main.c: 168:         controlarValores();
+[e ( _controlarValores ..  ]
+"169
+[; ;main.c: 169:         temperatura = (ADC_Read(0)*10/8 - 150);
+[e = _temperatura -> - / * ( _ADC_Read (1 -> -> 0 `i `uc -> -> 10 `i `ui -> -> 8 `i `ui -> -> 150 `i `ui `i ]
+"170
+[; ;main.c: 170:         cooler = (unsigned int)ADC_Read(1);
+[e = _cooler -> ( _ADC_Read (1 -> -> 1 `i `uc `i ]
+"171
+[; ;main.c: 171:         erro = (setPoint/10) - temperatura;
+[e = _erro -> - / _setPoint -> 10 `i _temperatura `f ]
+"172
+[; ;main.c: 172:         up = kp * erro;
+[e = _up * -> _kp `f _erro ]
+"174
+[; ;main.c: 174:         cooler = controleMaximoMinimo(cooler);
+[e = _cooler ( _controleMaximoMinimo (1 _cooler ]
+"175
+[; ;main.c: 175:         temperatura = controleMaximoMinimo(temperatura);
+[e = _temperatura ( _controleMaximoMinimo (1 _temperatura ]
+"176
+[; ;main.c: 176:         up = controleMaximoMinimo(up);
+[e = _up -> ( _controleMaximoMinimo (1 -> _up `i `f ]
+"178
+[; ;main.c: 178:         PWM1_Duty(up, 4000);
+[e ( _PWM1_Duty (2 , -> _up `ui -> -> 4000 `i `ui ]
+"179
+[; ;main.c: 179:         PWM2_Duty(cooler, 4000);
+[e ( _PWM2_Duty (2 , -> _cooler `ui -> -> 4000 `i `ui ]
+"180
+[; ;main.c: 180:         imprimirValoresLcd();
+[e ( _imprimirValoresLcd ..  ]
+"181
+[; ;main.c: 181:     }
+}
+[e :U 124 ]
+[e $U 125  ]
+[e :U 126 ]
+"183
+[; ;main.c: 183:     return;
+[e $UE 123  ]
+"184
+[; ;main.c: 184: }
+[e :UE 123 ]
 }
 [p f _sprintf 8388736 ]
-[a 3C 37 100 0 ]
+[a 1C 37 100 0 ]
+[a 2C 37 100 0 ]
 [a 4C 37 100 0 ]
-[a 1C 84 69 77 80 58 0 ]
-[a 2C 32 32 75 80 58 0 ]
+[a 6C 37 100 0 ]
+[a 5C 32 67 0 ]
+[a 7C 84 69 77 80 58 0 ]
+[a 8C 32 32 75 80 58 0 ]
+[a 3C 46 0 ]

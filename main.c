@@ -24,44 +24,27 @@ int temperatura;
 int menu = 1;
 
 int setPoint = 4200;
-int kp = 90;
+int setPointReferencia = 0;
 char setPoint_string[32];
+
+int kp = 90;
+int kpReferencia = 0;
 char kp_string[32];
 
-const unsigned char digito[10] = {
-    0b00111111, //0
-    0b00000110, //1
-    0b01011011, //2
-    0b01001111, //3
-    0b01100110, //4
-    0b01101101, //5
-    0b01111101, //6
-    0b00000111, //7
-    0b01111111, //8
-    0b01101111, //9
-};
-
-void atualizaDisplay(unsigned int tempSet){
+void imprimirTemperatura(unsigned int tempSet){
     int milhar = tempSet/1000;
     int centena = (tempSet%1000)/100;
     int dezena = ((tempSet%1000)%100)/10;
-    int unidade = ((tempSet%1000)%100)%10;
-    PORTD = digito[milhar];
-    RB7 = 1;
-    __delay_ms(10);
-    RB7 = 0;
-    PORTD = digito[centena];
-    RB6 = 1;
-    __delay_ms(10);
-    RB6 = 0;
-    PORTD = digito[dezena];
-    RB5 = 1;
-    __delay_ms(10);
-    RB5 = 0;
-    PORTD = digito[unidade];
-    RB4 = 1;
-    __delay_ms(10);
-    RB4 = 0;
+    
+    lcd_cmd(L1_digito6);
+    sprintf(setPoint_string, "%d", milhar);
+    lcd_str(setPoint_string);
+    sprintf(setPoint_string, "%d", centena);
+    lcd_str(setPoint_string);
+    lcd_str(".");
+    sprintf(setPoint_string, "%d", dezena);
+    lcd_str(setPoint_string);
+    lcd_str(" C");
 }
 
 void controlarValores(){
@@ -132,8 +115,24 @@ int controleMaximoMinimo(int valor){
     return valor;
 }
 
-void limpar(){
-    lcd_cmd(L_CLR);
+void imprimirValoresLcd(){
+    if (menu != 1){
+        if (setPoint != setPointReferencia){
+            imprimirTemperatura(setPoint);
+            setPointReferencia = setPoint;
+        }
+        
+        lcd_cmd(L1_digito10+6);
+    } else {
+        if (kp != kpReferencia){
+            lcd_cmd(L2_digito6);
+            sprintf(kp_string, "%d", kp);
+            lcd_str(kp_string);
+            kpReferencia = kp;
+        }
+        
+        lcd_cmd(L2_digito10+6);
+    }
 }
 
 void iniciarLcd(){
@@ -143,22 +142,11 @@ void iniciarLcd(){
     lcd_cmd(L2_digito1);
     lcd_str("  KP:");
     lcd_cmd(L1_digito6);
-}
-
-void imprimirValoresLcd(){
-    sprintf(setPoint_string, "%d", setPoint);
-    sprintf(kp_string, "%d", kp);
     
-    lcd_cmd(L1_digito6);
-    lcd_str(setPoint_string);
-    lcd_cmd(L2_digito6);
-    lcd_str(kp_string);
-    
-    if (menu != 1){
-        lcd_cmd(L1_digito10);
-    } else {
-        lcd_cmd(L2_digito10);
-    }
+    imprimirValoresLcd();
+    menu = 2;
+    imprimirValoresLcd();
+    menu = 1;
 }
 
 void main(void) {
@@ -190,7 +178,6 @@ void main(void) {
         PWM1_Duty(up, 4000);
         PWM2_Duty(cooler, 4000);
         imprimirValoresLcd();
-        //atualizaDisplay(setPoint);
     }
     
     return;
