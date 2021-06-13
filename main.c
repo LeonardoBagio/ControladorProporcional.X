@@ -12,11 +12,19 @@
 #include <string.h>
 #include "adc.h"
 #include "PWM.h"
+#include "lcd.h"
 #define _XTAL_FREQ 4000000
 #define S1 RB0
 #define S2 RB1
 #define S3 RB2
 #define S4 RB3
+
+int temperatura;
+int menu;
+int setPoint = 4190;
+int kp = 100;
+static char S4Anterior;
+static char S4Atual;
 
 const unsigned char digito[10] = {
     0b00111111, //0
@@ -54,15 +62,13 @@ void atualizaDisplay(unsigned int tempSet){
     RB4 = 0;
 }
 
-int controlarSetPoint(int setPoint){
+void controlarSetPoint(){
     static char S1Anterior;
     static char S1Atual;
     static char S2Anterior;
     static char S2Atual;
     static char S3Anterior;
     static char S3Atual;
-    static char S4Anterior;
-    static char S4Atual; 
     
     S1Atual = S1;
 
@@ -85,15 +91,6 @@ int controlarSetPoint(int setPoint){
     }
 
     S3Anterior = S3Atual;
-    S4Atual = S4;
-
-    if((S4Atual)&&(!S4Anterior)){
-        setPoint -= 10;
-    }
-
-    S4Anterior = S4Atual;
-    
-    return setPoint;
 }
 
 int controleMaximoMinimo(int valor){
@@ -108,27 +105,71 @@ int controleMaximoMinimo(int valor){
     return valor;
 }
 
+void limpar(){
+    lcd_cmd(L_CLR);
+}
+
+void iniciarLcd(){
+    lcd_init();
+    lcd_cmd(L1_digito1);
+    lcd_str("TEMP:");
+    lcd_cmd(L2_digito1);
+    lcd_str("  KP:");
+    lcd_cmd(L1_digito6);
+}
+
+void escrever(char texto, int linha){
+    if (linha == 1){
+        lcd_cmd(L1_digito6);
+    } else {
+        lcd_cmd(L2_digito6);
+    }
+    
+    lcd_str(texto);
+}
+
+void controlarLcd(){ 
+    S4Atual = S4;
+    
+    if((S4Atual)&&(!S4Anterior)){
+        if (menu == 1){
+            menu = 2;
+        } else {
+            menu = 1;
+        }
+    }
+    
+    S4Anterior = S4Atual;
+    
+    if (menu != 1){
+        escrever("Valor TEMP", 1);
+    } else {
+        escrever("Valor KP", 2);
+    }
+}
+
 void main(void) {
     TRISA = 0xFF;
     TRISB = 0x0F;
     TRISC = 0x00;
     TRISD = 0x00;
     TRISE = 0x00;
-    int temperatura;
     int cooler;
-    int setPoint = 4200;
+    float erro;
+    float up;
+    menu = 1;
     
     ADC_Init();
     PWM1_Start();
     PWM2_Start();
+    iniciarLcd();
     
     while(1){
-        setPoint    = controlarSetPoint(setPoint);
+        controlarSetPoint();
         temperatura = (ADC_Read(0)*10/8 - 150);
         cooler      = (unsigned int)ADC_Read(1);
-        int erro    = (setPoint/10) - temperatura;
-        int kp      = 100;
-        int up      = kp * erro;
+        erro        = (setPoint/10) - temperatura;
+        up          = kp * erro;
         
         cooler      = controleMaximoMinimo(cooler);
         temperatura = controleMaximoMinimo(temperatura);
@@ -136,6 +177,7 @@ void main(void) {
         
         PWM1_Duty(up, 4000);
         PWM2_Duty(cooler, 4000);
+        controlarLcd();
         atualizaDisplay(setPoint);
     }
     

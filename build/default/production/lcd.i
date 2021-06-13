@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "lcd.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,17 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-#pragma config FOSC = HS
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config BOREN = OFF
-#pragma config LVP = OFF
-#pragma config CPD = OFF
-#pragma config WRT = OFF
-#pragma config CP = OFF
-
-
+# 1 "lcd.c" 2
+# 26 "lcd.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1726,332 +1717,69 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 10 "main.c" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 1 3
-
-
-
-# 1 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__size_t.h" 1 3
-
-
-
-typedef unsigned size_t;
-# 4 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 2 3
-
-# 1 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__null.h" 1 3
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdarg.h" 1 3
-
-
-
-
-
-
-typedef void * va_list[1];
-
-#pragma intrinsic(__va_start)
-extern void * __va_start(void);
-
-#pragma intrinsic(__va_arg)
-extern void * __va_arg(void *, ...);
-# 11 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 2 3
-# 43 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 3
-struct __prbuf
-{
- char * ptr;
- void (* func)(char);
-};
-# 85 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\conio.h" 1 3
-
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\errno.h" 1 3
-# 29 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\errno.h" 3
-extern int errno;
-# 8 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\conio.h" 2 3
-
-
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-
-
-extern char * cgets(char *);
-extern void cputs(const char *);
-# 85 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-extern int cprintf(char *, ...);
-#pragma printf_check(cprintf)
-
-
-
-extern int _doprnt(struct __prbuf *, const register char *, register va_list);
-# 180 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 3
-#pragma printf_check(vprintf) const
-#pragma printf_check(vsprintf) const
-
-extern char * gets(char *);
-extern int puts(const char *);
-extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
-extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
-extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
-extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
-extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
-extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
-
-#pragma printf_check(printf) const
-#pragma printf_check(sprintf) const
-extern int sprintf(char *, const char *, ...);
-extern int printf(const char *, ...);
-# 11 "main.c" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\string.h" 1 3
-# 14 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\string.h" 3
-extern void * memcpy(void *, const void *, size_t);
-extern void * memmove(void *, const void *, size_t);
-extern void * memset(void *, int, size_t);
-# 36 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\string.h" 3
-extern char * strcat(char *, const char *);
-extern char * strcpy(char *, const char *);
-extern char * strncat(char *, const char *, size_t);
-extern char * strncpy(char *, const char *, size_t);
-extern char * strdup(const char *);
-extern char * strtok(char *, const char *);
-
-
-extern int memcmp(const void *, const void *, size_t);
-extern int strcmp(const char *, const char *);
-extern int stricmp(const char *, const char *);
-extern int strncmp(const char *, const char *, size_t);
-extern int strnicmp(const char *, const char *, size_t);
-extern void * memchr(const void *, int, size_t);
-extern size_t strcspn(const char *, const char *);
-extern char * strpbrk(const char *, const char *);
-extern size_t strspn(const char *, const char *);
-extern char * strstr(const char *, const char *);
-extern char * stristr(const char *, const char *);
-extern char * strerror(int);
-extern size_t strlen(const char *);
-extern char * strchr(const char *, int);
-extern char * strichr(const char *, int);
-extern char * strrchr(const char *, int);
-extern char * strrichr(const char *, int);
-# 12 "main.c" 2
-
-# 1 "./adc.h" 1
-# 18 "./adc.h"
-void ADC_Init(void);
-unsigned int ADC_Read(unsigned char channel);
-# 13 "main.c" 2
-
-# 1 "./PWM.h" 1
-# 18 "./PWM.h"
-void PWM_Init(long freq);
-void PWM1_Duty(unsigned int duty, unsigned int freq);
-void PWM1_Start(void);
-void PWM1_Stop(void);
-void PWM2_Duty(unsigned int duty, unsigned int freq);
-void PWM2_Start(void);
-void PWM2_Stop(void);
-# 14 "main.c" 2
-
+# 27 "lcd.c" 2
 # 1 "./lcd.h" 1
 # 64 "./lcd.h"
 void lcd_init(void);
 void lcd_cmd(unsigned char val);
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
-# 15 "main.c" 2
+# 28 "lcd.c" 2
 
 
-
-
-
-
-
-int temperatura;
-int menu;
-int setPoint = 4190;
-int kp = 100;
-static char S4Anterior;
-static char S4Atual;
-
-const unsigned char digito[10] = {
-    0b00111111,
-    0b00000110,
-    0b01011011,
-    0b01001111,
-    0b01100110,
-    0b01101101,
-    0b01111101,
-    0b00000111,
-    0b01111111,
-    0b01101111,
-};
-
-void atualizaDisplay(unsigned int tempSet){
-    int milhar = tempSet/1000;
-    int centena = (tempSet%1000)/100;
-    int dezena = ((tempSet%1000)%100)/10;
-    int unidade = ((tempSet%1000)%100)%10;
-    PORTD = digito[milhar];
-    RB7 = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RB7 = 0;
-    PORTD = digito[centena];
-    RB6 = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RB6 = 0;
-    PORTD = digito[dezena];
-    RB5 = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RB5 = 0;
-    PORTD = digito[unidade];
-    RB4 = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RB4 = 0;
+void lcd_wr(unsigned char val)
+{
+  PORTD=val;
 }
 
-void controlarSetPoint(){
-    static char S1Anterior;
-    static char S1Atual;
-    static char S2Anterior;
-    static char S2Atual;
-    static char S3Anterior;
-    static char S3Atual;
+void lcd_cmd(unsigned char val)
+{
+ PORTEbits.RE1=1;
+        lcd_wr(val);
+        PORTEbits.RE0=0;
 
-    S1Atual = RB0;
+        PORTEbits.RE1=0;
 
-    if((S1Atual)&&(!S1Anterior)){
-        setPoint += 100;
-    }
-
-    S1Anterior = S1Atual;
-    S2Atual = RB1;
-
-    if((S2Atual)&&(!S2Anterior)){
-        setPoint -= 100;
-    }
-
-    S2Anterior = S2Atual;
-    S3Atual = RB2;
-
-    if((S3Atual)&&(!S3Anterior)){
-        setPoint += 10;
-    }
-
-    S3Anterior = S3Atual;
+ PORTEbits.RE1=1;
 }
 
-int controleMaximoMinimo(int valor){
-    if (valor < 0){
-        valor = 0;
-    }
+void lcd_dat(unsigned char val)
+{
+ PORTEbits.RE1=1;
+        lcd_wr(val);
+        PORTEbits.RE0=1;
 
-    if (valor > 1023){
-        valor = 1023;
-    }
+        PORTEbits.RE1=0;
 
-    return valor;
+ PORTEbits.RE1=1;
 }
 
-void limpar(){
-    lcd_cmd(0x01);
-}
+void lcd_init(void)
+{
+ PORTEbits.RE1=0;
+ PORTEbits.RE0=0;
 
-void iniciarLcd(){
-    lcd_init();
+ PORTEbits.RE1=1;
+
+ lcd_cmd(0x38);
+
+ lcd_cmd(0x38);
+
+ lcd_cmd(0x38);
+ lcd_cmd(0x08);
+ lcd_cmd(0x0F);
+ lcd_cmd(0x01);
+ lcd_cmd(0x38);
     lcd_cmd(0x80);
-    lcd_str("TEMP:");
-    lcd_cmd(0xC0);
-    lcd_str("  KP:");
-    lcd_cmd(0x85);
 }
 
-void escrever(char texto, int linha){
-    if (linha == 1){
-        lcd_cmd(0x85);
-    } else {
-        lcd_cmd(0xC5);
-    }
+void lcd_str(const char* str)
+{
+ unsigned char i=0;
 
-    lcd_str(texto);
-}
-
-void controlarLcd(){
-    S4Atual = RB3;
-
-    if((S4Atual)&&(!S4Anterior)){
-        if (menu == 1){
-            menu = 2;
-        } else {
-            menu = 1;
-        }
-    }
-
-    S4Anterior = S4Atual;
-
-    if (menu != 1){
-        escrever("Valor TEMP", 1);
-    } else {
-        escrever("Valor KP", 2);
-    }
-}
-
-void main(void) {
-    TRISA = 0xFF;
-    TRISB = 0x0F;
-    TRISC = 0x00;
-    TRISD = 0x00;
-    TRISE = 0x00;
-    int cooler;
-    float erro;
-    float up;
-    menu = 1;
-
-    ADC_Init();
-    PWM1_Start();
-    PWM2_Start();
-    iniciarLcd();
-
-    while(1){
-        controlarSetPoint();
-        temperatura = (ADC_Read(0)*10/8 - 150);
-        cooler = (unsigned int)ADC_Read(1);
-        erro = (setPoint/10) - temperatura;
-        up = kp * erro;
-
-        cooler = controleMaximoMinimo(cooler);
-        temperatura = controleMaximoMinimo(temperatura);
-        up = controleMaximoMinimo(up);
-
-        PWM1_Duty(up, 4000);
-        PWM2_Duty(cooler, 4000);
-        controlarLcd();
-        atualizaDisplay(setPoint);
-    }
-
-    return;
+ while(str[i] != 0 )
+ {
+   lcd_dat(str[i]);
+   i++;
+ }
 }
